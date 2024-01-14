@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Equals, IsIn, IsSemVer, IsString, } from 'class-validator'
 import { ChildEntity, Column, EntitySchema, } from 'typeorm'
-// import { UgcSchema } from './ugc.entity'
-import { UgcEntity } from './ugc.entity'
+import { UgcSchema } from './ugc.entity'
+import { UgcEntityInner } from './ugc.entity'
 
 export class CommentDataBodyPayload {
   @ApiProperty()
@@ -23,25 +23,24 @@ export class CommentDataBodyPayload {
   declare content: string
 }
 
-@ChildEntity()
-export class CommentEntity extends UgcEntity {
+export class CommentEntity extends UgcEntityInner {
   @ApiProperty()
-  @Column({ type: 'jsonb' })
   declare d: CommentDataBodyPayload
 }
 
-// export const CommentSchema = new EntitySchema<CommentEntity>({
-//   target: CommentEntity,
-//   name: 'CommentEntity',
-//   type: 'entity-child',
-//   // inheritance: { pattern: 'STI' },
-//   // When saving instances of 'A', the "type" column will have the value
-//   // specified on the 'discriminatorValue' property
-//   // discriminatorValue: "my-custom-discriminator-value-for-A",
-//   columns: {
-//     ...UgcSchema.options.columns,
-//     d: {
-//       type: 'jsonb',
-//     },
-//   },
-// })
+export const CommentSchema = new EntitySchema<CommentEntity>({
+  target: CommentEntity,
+  name: 'CommentEntity',
+  type: 'entity-child',
+  // inheritance: { pattern: 'STI' },
+  // When saving instances of 'A', the "type" column will have the value
+  // specified on the 'discriminatorValue' property
+  // discriminatorValue: "my-custom-discriminator-value-for-A",
+  columns: {
+    ...UgcSchema.options.columns,
+    d: {
+      type: 'jsonb',
+    },
+  },
+  relations: UgcSchema.options.relations,
+})
