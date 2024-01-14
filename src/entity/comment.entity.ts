@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Equals, IsIn, IsSemVer, IsString, } from 'class-validator'
 import { ChildEntity, Column, EntitySchema, } from 'typeorm'
 // import { UgcSchema } from './ugc.entity'
-import { UgcEntityInner } from './ugc.entity'
+import { UgcEntity } from './ugc.entity'
 
 export class CommentDataBodyPayload {
   @ApiProperty()
@@ -24,7 +24,7 @@ export class CommentDataBodyPayload {
 }
 
 @ChildEntity()
-export class CommentEntity extends UgcEntityInner {
+export class CommentEntity extends UgcEntity {
   @ApiProperty()
   @Column({ type: 'jsonb' })
   declare d: CommentDataBodyPayload

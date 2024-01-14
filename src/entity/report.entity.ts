@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Equals, IsIn, IsOptional, IsSemVer, Length, } from 'class-validator'
 import { ChildEntity, Column, EntitySchema, } from 'typeorm'
 // import { UgcSchema } from './ugc.entity'
-import { UgcEntityInner, } from './ugc.entity'
+import { UgcEntity, } from './ugc.entity'
 
 /**
  * Is not true class. It is not used. But type the same
@@ -28,7 +28,7 @@ export class ReportDataBodyPayload {
 }
 
 @ChildEntity()
-export class ReportEntity extends UgcEntityInner {
+export class ReportEntity extends UgcEntity {
   @ApiProperty()
   @Column({ type: 'jsonb' })
   declare d: ReportDataBodyPayload

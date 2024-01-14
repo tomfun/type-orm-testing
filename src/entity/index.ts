@@ -8,11 +8,11 @@ import { SignatureEntity } from './signature.entity'
 // import { ReportSchema } from './report.entity'
 import { ReportEntity } from './report.entity'
 // import { UgcSchema } from './ugc.entity'
-import { UgcEntityInner } from './ugc.entity'
+import { UgcEntity } from './ugc.entity'
 
 export const entities = [
   // UgcSchema,
-  UgcEntityInner,
+  UgcEntity,
   // CommentSchema,
   CommentEntity,
   SignatureEntity,
