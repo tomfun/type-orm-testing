@@ -14,8 +14,7 @@ npm install
 ### Run
 
 ```bash
-# development
-docker compose up api
+docker run --rm -d postgres ...
 ```
 
 see start node scripts
@@ -31,6 +30,9 @@ npm run
 # npm run start:dev
 # ...
 ```
+
+Open url:
+http://localhost:3000/api/comment?page=0&pageSize=10&content=1
 
 ## License
 

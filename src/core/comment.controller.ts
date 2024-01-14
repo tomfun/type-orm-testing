@@ -20,6 +20,7 @@ import {
   CommentEntity,
   CommentForList,
   CommentService,
+  QueryOperator,
 } from './comment.service'
 
 @Controller('/api/comment')
@@ -48,7 +49,7 @@ export class CommentController {
     @Query() query: { page: number, pageSize: 10 },
     @Query('content') content: string,
   ) {
-    return this.commentService.getList(query, {d: {content}})
+    return this.commentService.getList(query, {d: {content: {filters: {[QueryOperator.Equal]: content}}}})
   }
 
   @Post('/validate')

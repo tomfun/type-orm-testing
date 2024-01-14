@@ -83,16 +83,16 @@ export class CommentService {
 
   async getList(
     { page, pageSize }: { page: number, pageSize: 10 },
-    filters: { d: { content: string } },
+    filters: { d: { content: { filters: { [QueryOperator.Equal]: string } } }},
   ) {
     let query = this.commentRepo
       .createQueryBuilder('c')
-      .innerJoinAndSelect('r.signature', 's')
-      .select(['c', 's.id', 's.signature', 's.signedAt', 's.user'])
+      .innerJoinAndSelect('c.signature', 's')
+      .select(['c', 's.id', 's.createdAt'])
     let i = 0
     for (const f in filters.d) {
       let key: string
-      key = `r.d->>'${f}'`
+      key = `c.d->>'${f}'`
       const subWhere = this.buildStringWhere(filters.d[f], key, `d${f.replace(/\W/g, '')}${i++}`)
       if (!subWhere) {
         continue
